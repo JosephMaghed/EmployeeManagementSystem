@@ -18,7 +18,7 @@ public class EmployeeResource {
     private final EmployeeService employeeService;
 @GetMapping("/all")
     public ResponseEntity<List<Employee>> getAllEmployees(){
-    List<Employee> employees=employeeService.findAllEmplyees();
+    List<Employee> employees=employeeService.findAllEmployees();
     return new ResponseEntity<>(employees, HttpStatus.OK);
 }
     @GetMapping("/find/{id}")
@@ -36,17 +36,16 @@ public class EmployeeResource {
 
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee,@PathVariable("id")Long id){
     Employee oldEmployee= employeeService.findEmployeeById(id);
-    oldEmployee.setName(employee.getName());
-    if(employee.getName()!=null){
-        oldEmployee.setName(employee.getName());}
-    if(employee.getEmail()!=null){
-        oldEmployee.setEmail(employee.getEmail());}
-    if(employee.getPhone()!=null){
-        oldEmployee.setPhone(employee.getPhone());}
-    if(employee.getJobTitle()!=null){
-        oldEmployee.setJobTitle(employee.getJobTitle());}
-    if(employee.getImageUrl()!=null){
-        oldEmployee.setImageUrl(employee.getImageUrl());}
+
+    if(employee.getName()!=null){oldEmployee.setName(employee.getName());}
+
+    if(employee.getEmail()!=null){oldEmployee.setEmail(employee.getEmail());}
+
+    if(employee.getPhone()!=null){oldEmployee.setPhone(employee.getPhone());}
+
+    if(employee.getJobTitle()!=null){oldEmployee.setJobTitle(employee.getJobTitle());}
+
+    if(employee.getImageUrl()!=null){oldEmployee.setImageUrl(employee.getImageUrl());}
 
         Employee updateEmployee = employeeService.updateEmployee(oldEmployee);
         return new ResponseEntity<>(updateEmployee, HttpStatus.OK);

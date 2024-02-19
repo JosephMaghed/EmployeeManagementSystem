@@ -15,7 +15,17 @@ public class Employee implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageUrl;
-   @Column(nullable = false,updatable = false)
+    private Long TeamId;
+
+    public Long getTeamId() {
+        return TeamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        TeamId = teamId;
+    }
+
+    @Column(nullable = false,updatable = false)
     private String employeeCode;
 
     public Long getId() {
@@ -83,6 +93,7 @@ public class Employee implements Serializable {
                 ", jobTitle='" + jobTitle + '\'' +
                 ", phone='" + phone + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", TeamId=" + TeamId +
                 ", employeeCode='" + employeeCode + '\'' +
                 '}';
     }
