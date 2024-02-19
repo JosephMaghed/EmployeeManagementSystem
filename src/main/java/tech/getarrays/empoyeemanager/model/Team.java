@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)//How to generate value
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = true,updatable = true)
     private Long teamId;
     private Long TeamLeaderId;
     private String TeamRole;

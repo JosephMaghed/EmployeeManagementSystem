@@ -19,7 +19,7 @@ public class TeamResource {
     }
     private final TeamService teamService;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Team> addTeam(@RequestBody Team team){
         Team newTeam;
         newTeam = teamService.addTeam(team);

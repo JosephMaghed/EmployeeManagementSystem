@@ -15,14 +15,18 @@ public class Employee implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageUrl;
-    private Long TeamId;
 
-    public Long getTeamId() {
-        return TeamId;
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @JoinColumn(name = "TeamId")  // Name of the foreign key column
+    private Team team;
+    public Team getTeamId() {
+        return team;
     }
 
-    public void setTeamId(Long teamId) {
-        TeamId = teamId;
+
+
+    public void setTeamId(Team teamId) {
+        team = teamId;
     }
 
     @Column(nullable = false,updatable = false)
@@ -93,7 +97,7 @@ public class Employee implements Serializable {
                 ", jobTitle='" + jobTitle + '\'' +
                 ", phone='" + phone + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
-                ", TeamId=" + TeamId +
+                ", TeamId=" + team +
                 ", employeeCode='" + employeeCode + '\'' +
                 '}';
     }
