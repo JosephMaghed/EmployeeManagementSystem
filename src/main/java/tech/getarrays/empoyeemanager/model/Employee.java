@@ -6,7 +6,7 @@ import java.io.Serializable;
 //Use @Entity to make sure that this class gets mapped to any database
 @Entity
 public class Employee implements Serializable {
-@Id//Primary Key
+@Id //Primary Key
 @GeneratedValue(strategy= GenerationType.IDENTITY)//How to generate value
 @Column(nullable = false,updatable = false)
     private Long id;
@@ -15,75 +15,56 @@ public class Employee implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageUrl;
-
+//Connect to Team table
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "TeamId")  // Name of the foreign key column
+    @JoinColumn(name = "teamId")  // Name of the foreign key column
     private Team team;
-    public Team getTeamId() {
-        return team;
-    }
-
-
-
-    public void setTeamId(Team teamId) {
-        team = teamId;
-    }
-
     @Column(nullable = false,updatable = false)
     private String employeeCode;
 
+    //Setters & Getters
+    public Team getTeamId() {
+        return team;
+    }
+    public void setTeamId(Team teamId) {
+        team = teamId;
+    }
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getJobTitle() {
         return jobTitle;
     }
-
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
-
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     public String getImageUrl() {
         return imageUrl;
     }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
     public String getEmployeeCode() {
         return employeeCode;
     }
-
     public void setEmployeeCode(String employeeCode) {
         this.employeeCode = employeeCode;
     }

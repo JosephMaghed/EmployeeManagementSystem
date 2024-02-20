@@ -31,15 +31,15 @@ public class TeamResource {
         List<Team> Teams=teamService.findAllTeams();
         return new ResponseEntity<>(Teams,HttpStatus.OK);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity <Optional<Team>> getTeamById(@PathVariable("id")Long id){
-       Optional<Team>  teams=teamService.findTeamById(id);
+    @GetMapping("/find/{id}")
+    public ResponseEntity <Team> getTeamById(@PathVariable("id")Long id){
+       Team  teams=teamService.findTeamById(id);
         return new ResponseEntity<>(teams,HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
 
     public ResponseEntity<Team> updateEmployee(@RequestBody Team team,@PathVariable("id")Long id){
-        Team existingTeam= teamService.findTeamByTeamId(id);
+        Team existingTeam= teamService.findTeamById(id);
 
         if(team.getTeamLeaderId()!=null) {
             existingTeam.setTeamLeaderId(team.getTeamLeaderId());

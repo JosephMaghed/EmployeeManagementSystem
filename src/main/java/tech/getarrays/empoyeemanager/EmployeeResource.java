@@ -13,32 +13,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeResource {
+    //Constructor
     public EmployeeResource(EmployeeService employeeService,TeamService teamService) {
         this.employeeService = employeeService;
         this.teamService=teamService;
     }
 
+
     private final EmployeeService employeeService;
     private final TeamService teamService;
+
+    //Get all employee data
 @GetMapping("/all")
     public ResponseEntity<List<Employee>> getAllEmployees(){
     List<Employee> employees=employeeService.findAllEmployees();
-    return new ResponseEntity<>(employees, HttpStatus.OK);
-}
+    return new ResponseEntity<>(employees, HttpStatus.OK);}
+
+    //Get employee by id
     @GetMapping("/find/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id")Long id){
         Employee employee=employeeService.findEmployeeById(id);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
-    }
+        return new ResponseEntity<>(employee, HttpStatus.OK);}
+
+    //Add new employee
     @PostMapping("/add")
 
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
         Employee newEmployee = employeeService.addEmployee(employee);
         return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
     }
+
+    //update an employee by id
     @PutMapping("/update/{id}")
 
-    public ResponseEntity<Team> updateEmployee(@RequestBody Employee employee,@PathVariable("id")Long id){
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee,@PathVariable("id")Long id){
     Employee oldEmployee= employeeService.findEmployeeById(id);
 
     if(employee.getName()!=null){oldEmployee.setName(employee.getName());}
@@ -52,16 +60,22 @@ public class EmployeeResource {
     if(employee.getImageUrl()!=null){oldEmployee.setImageUrl(employee.getImageUrl());}
 
 if(employee.getTeamId()!=null){
-Team existigTeam= teamService.findTeamByTeamId(employee.getTeamId().getTeamId());
+Team existigTeam= teamService.findTeamById(employee.getTeamId().getTeamId());
 employee.setTeamId(existigTeam);
 }
-        Team existigTeam= teamService.findTeamByTeamId(employee.getTeamId().getTeamId());
+
+        Team existigTeam= teamService.findTeamById(employee.getTeamId().getTeamId());
         oldEmployee.setTeamId(existigTeam);
 
         Employee updateEmployee = employeeService.updateEmployee(oldEmployee);
-        return new ResponseEntity<>(existigTeam, HttpStatus.OK);
+        return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
     }
-
+//Find Employees associated in each Team
+@GetMapping("find/teamId/{id}")
+public ResponseEntity<List<Employee>> getEmployeeByTeamId(@PathVariable("id")Long id){
+    List<Employee> employees=employeeService.findEmployeeByTeamId(id);
+    return new ResponseEntity<>(employees, HttpStatus.OK);}
+    //Delete Employee
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id){
    employeeService.deleteEmployee(id);
