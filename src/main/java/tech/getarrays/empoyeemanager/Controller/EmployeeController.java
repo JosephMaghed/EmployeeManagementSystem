@@ -1,4 +1,4 @@
-package tech.getarrays.empoyeemanager;
+package tech.getarrays.empoyeemanager.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
-public class EmployeeResource {
+public class EmployeeController {
     //Constructor
-    public EmployeeResource(EmployeeService employeeService,TeamService teamService) {
+    public EmployeeController(EmployeeService employeeService, TeamService teamService) {
         this.employeeService = employeeService;
         this.teamService=teamService;
     }

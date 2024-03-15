@@ -1,20 +1,18 @@
-package tech.getarrays.empoyeemanager;
+package tech.getarrays.empoyeemanager.Controller;
+import java.lang.Long;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.empoyeemanager.model.Employee;
 import tech.getarrays.empoyeemanager.model.Team;
-import tech.getarrays.empoyeemanager.service.EmployeeService;
 import tech.getarrays.empoyeemanager.service.TeamService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/team")
-public class TeamResource {
-    public TeamResource(TeamService teamService) {
+public class TeamController {
+    public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
     private final TeamService teamService;
